@@ -7,6 +7,7 @@ export const AllCoinsStyled = styled.div`
 export const TableStyled = styled.table`
     border: 1px solid black;
     padding: 40px;
+    margin: 50px 0;
     width: 100%;
 `
 export const ThNameStyled = styled.th`

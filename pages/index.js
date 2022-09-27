@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css'
 
 import FavoriteCoins from '../components/favoriteCoins.component'
 import { AllCoins } from '../components/allCoins.component'
+import CoinInfo from '../components/coinInfo.component'
+import SelectedCoin from '../components/selectedCoin.component'
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
       </Head>
       <FavoriteCoins/>
       <AllCoins/>
+      <SelectedCoin/>
     </div>
   )
 }

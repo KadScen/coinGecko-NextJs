@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AllCoinsStyled, TableStyled, TdNameStyled, TdRegStyled, TdRegStyledBigScreen, ThNameStyled, ThRegStyled, ThRegStyledBigScreen } from '../styles/allCoins.styles';
+import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
 
 export const AllCoins = () => {
     const [listCoinsData, setListCoinsData] = useState([]);
-    const [listCoinsToUseWithData, setListCoinsToUseWithData] = useState([]);
     const listCoinsToUse = ['Bitcoin', 'Ethereum', 'XRP', 'Bitcoin Cash', 'Litecoin'];
- 
+    const {selectedCurrenciesData, setSelectedCurrenciesData, selectedCoinInfoData, setSelectedCoinInfoData} = useContext(CurrencyDataContext);
+
     useEffect(() => {
         fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad`)
         .then((response) => {
@@ -28,27 +29,16 @@ export const AllCoins = () => {
             Object.values(listCoinsData).forEach((currency) => {
                 if (listCoinsToUse.indexOf(currency.name) !== -1) {
                     coinsTempContainer.push(currency);
-                    setListCoinsToUseWithData(coinsTempContainer);
+                    setSelectedCurrenciesData(coinsTempContainer);
                 }
             });
         };
         filterListCoinsData();
     }, [listCoinsData]);
-    
-    
-    // const tableCreation = () => {
-        
-    //     listCoinsToUseWithData.map((currency) => {
-    //         return (
-    //             <td>{currency.name}</td>
-    //         )
-    //     })
-       
-    // }
 
-    // useEffect(() => {
-    //     tableCreation(listCoinsToUseWithData);
-    // }, [listCoinsToUseWithData])
+    const handleSelectedCoin = (currency) => {
+        setSelectedCoinInfoData(currency);
+    }
 
   return (
     <AllCoinsStyled>
@@ -63,9 +53,9 @@ export const AllCoins = () => {
                 </tr>
             </thead>
             <tbody>
-                {listCoinsToUseWithData.map((currency) => {
+                {selectedCurrenciesData.map((currency) => {
                     return (
-                        <tr key={currency.id}>
+                        <tr key={currency.id} onClick={() => handleSelectedCoin(currency)}>
                             <TdNameStyled>{currency.name}</TdNameStyled>
                             <TdRegStyledBigScreen>{currency.total_volume}</TdRegStyledBigScreen>
                             <TdRegStyledBigScreen>{currency.market_cap}</TdRegStyledBigScreen>
