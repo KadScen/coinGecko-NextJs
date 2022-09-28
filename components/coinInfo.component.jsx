@@ -1,11 +1,19 @@
 import React, { useContext } from 'react';
 import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
-import { SelectedCoinInfo } from '../styles/coinInfo.styles.jsx';
+import { AddToFavButton, SelectedCoinInfo } from '../styles/coinInfo.styles.jsx';
 
 export default function CoinInfo() {
-    const {selectedCoinInfoData} = useContext(CurrencyDataContext);
+    const {selectedCoinInfoData, favCoins, setFavCoins} = useContext(CurrencyDataContext);
     console.log("data in the context is: ", selectedCoinInfoData);
   
+    const handleSetFavoriteCoins = () => {
+      const existingFavCoin = favCoins.find(({ name }) => name === selectedCoinInfoData.name);
+      if (!existingFavCoin) {
+        return setFavCoins([...favCoins, selectedCoinInfoData]);
+      }
+    }
+    console.log("Favorite Coin clicked: ", favCoins);
+
     return (
       <SelectedCoinInfo>
         <h3>
@@ -40,9 +48,9 @@ export default function CoinInfo() {
           MARKET CAP RANK: <span>{selectedCoinInfoData.market_cap_rank}</span>
         </p>
         <br />
-        <p className="addToFavButton" onClick={() => handleSetFavoriteCoins()}>
+        <AddToFavButton onClick={() => handleSetFavoriteCoins()}>
           + ADD TO FAVORITES
-        </p>
+        </AddToFavButton>
         {/* <span id="alreadyInFavMessage" className="isVisible">
           Currency already added to favorite
         </span> */}

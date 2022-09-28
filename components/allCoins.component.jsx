@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AllCoinsStyled, TableStyled, TdNameStyled, TdRegStyled, TdRegStyledBigScreen, ThNameStyled, ThRegStyled, ThRegStyledBigScreen } from '../styles/allCoins.styles';
+import { AllCoinsStyled, TableStyled, TrStyled, TdNameStyled, TdRegStyled, TdRegStyledBigScreen, ThNameStyled, ThRegStyled, ThRegStyledBigScreen } from '../styles/allCoins.styles';
 import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
 
 export const AllCoins = () => {
@@ -55,12 +55,12 @@ export const AllCoins = () => {
             <tbody>
                 {selectedCurrenciesData.map((currency) => {
                     return (
-                        <tr key={currency.id} onClick={() => handleSelectedCoin(currency)}>
+                        <TrStyled key={currency.id} onClick={() => handleSelectedCoin(currency)}>
                             <TdNameStyled>{currency.name}</TdNameStyled>
                             <TdRegStyledBigScreen>{currency.total_volume}</TdRegStyledBigScreen>
                             <TdRegStyledBigScreen>{currency.market_cap}</TdRegStyledBigScreen>
                             <TdRegStyled>{currency.current_price}</TdRegStyled>
-                        </tr>
+                        </TrStyled>
                     )
                 })}
             </tbody>

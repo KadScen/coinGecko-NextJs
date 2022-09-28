@@ -5,6 +5,19 @@ export const SelectedCoinInfo = styled.div`
     padding: 5%;
     width: 50%;
     border: 1px solid #e2e2e2;
+
+    p {
+        font-weight: bold;
+
+        span {
+           font-weight: initial;
+        }
+    }
+`
+
+export const AddToFavButton = styled.p`
+    cursor: pointer;
+    color: #1882e4;
 `
 // .selectedCoinInfo {
 

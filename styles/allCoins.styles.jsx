@@ -10,6 +10,14 @@ export const TableStyled = styled.table`
     margin: 50px 0;
     width: 100%;
 `
+
+export const TrStyled = styled.tr`
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+`
+
 export const ThNameStyled = styled.th`
     text-align: left;
 `
@@ -39,13 +47,3 @@ export const TdRegStyledBigScreen = styled.td`
         display: none;
     }
 `
-
-// table,
-// td {
-//     text-align: right;
-// }
-  
-// .thName,
-// .tdName {
-//     text-align: left;
-// }
