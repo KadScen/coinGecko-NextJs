@@ -4,16 +4,16 @@ import { AddToFavButton, SelectedCoinInfo } from '../styles/coinInfo.styles.jsx'
 
 export default function CoinInfo() {
     const {selectedCoinInfoData, favCoins, setFavCoins} = useContext(CurrencyDataContext);
-    console.log("data in the context is: ", selectedCoinInfoData);
   
     const handleSetFavoriteCoins = () => {
       const existingFavCoin = favCoins.find(({ name }) => name === selectedCoinInfoData.name);
       if (!existingFavCoin) {
         return setFavCoins([...favCoins, selectedCoinInfoData]);
+      } else if (existingFavCoin) {
+        return console.log("Coin already added to favorite")
       }
     }
-    console.log("Favorite Coin clicked: ", favCoins);
-
+    
     return (
       <SelectedCoinInfo>
         <h3>

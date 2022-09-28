@@ -4,8 +4,7 @@ import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
 
 export const AllCoins = () => {
     const [listCoinsData, setListCoinsData] = useState([]);
-    const listCoinsToUse = ['Bitcoin', 'Ethereum', 'XRP', 'Bitcoin Cash', 'Litecoin'];
-    const {selectedCurrenciesData, setSelectedCurrenciesData, selectedCoinInfoData, setSelectedCoinInfoData} = useContext(CurrencyDataContext);
+    const {selectedCurrenciesData, setSelectedCurrenciesData, selectedCoinInfoData, setSelectedCoinInfoData, coinsToUse} = useContext(CurrencyDataContext);
 
     useEffect(() => {
         fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad`)
@@ -27,7 +26,7 @@ export const AllCoins = () => {
         const filterListCoinsData = () => {
             const coinsTempContainer = [];
             Object.values(listCoinsData).forEach((currency) => {
-                if (listCoinsToUse.indexOf(currency.name) !== -1) {
+                if (coinsToUse.indexOf(currency.name) !== -1) {
                     coinsTempContainer.push(currency);
                     setSelectedCurrenciesData(coinsTempContainer);
                 }
