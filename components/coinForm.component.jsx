@@ -66,17 +66,15 @@ export default function CoinForm() {
         e.preventDefault();
         const amount = e.target.amount.value;
         const currency = e.target.currency.value;
-        const currencySelectedInfo = selectedCoinInfoData.name;
         setCurrencyToBuyOrSell(currency);
         setAmountToBuyOrSell(amount);
-
-        setReadUseEffectMessage(readUseEffectMessage + 1)
-      }
+        setReadUseEffectMessage(readUseEffectMessage + 1);
+        setSubmitMessage(`Please Select BUY or SELL Above`);
+        }
 
       useEffect(() => {
         if (amountToBuyOrSell, currencyToBuyOrSellData, buyOrSell, currenciesValueComparaison, selectedCoinInfoData.name)
         console.log(amountToBuyOrSell, currencyToBuyOrSell, buyOrSell, selectedCoinInfoData.name)
-        // Find how to update state immediately
         if (buyOrSell === 'buy') {
             setSubmitMessage(`You Have Purchased ${amountToBuyOrSell} ${selectedCoinInfoData.name} For ${" "}
             ${currenciesValueComparaison * amountToBuyOrSell} ${currencyToBuyOrSellData.symbol}`)
@@ -86,27 +84,7 @@ export default function CoinForm() {
         }
       }, [readUseEffectMessage, currenciesValueComparaison]);
 
-      // const renderSubmitAnswer = () => {
-      //   if (buyOrSell === "buy") {
-      //     return (
-      //       <p id="submitResponseText" className="isVisible">
-      //         You Have Purchased {amountToBuy} {selectedCurrency.symbol} For{" "}
-      //         {fetchCurrenciesPriceDiff * amountToBuy} {currenciesToBuyData.symbol}
-      //       </p>
-      //     );
-      //   } else if (buyOrSell === "sell") {
-      //     return (
-      //       <p id="submitResponseText" className="isVisible">
-      //         You Have Sold {amountToBuy} {selectedCurrency.symbol} For{" "}
-      //         {fetchCurrenciesPriceDiff * amountToBuy} {currenciesToBuyData.symbol}
-      //       </p>
-      //     );
-      //   } else {
-      //     return <p id="submitErrorResponseText">*Select BUY Or Sell Above</p>;
-      //   }
-      // };
-
-    return (
+      return (
         <SelectedCoinFormContainerStyled>
             <SelectedCoinFormButtonsStyled>
                 <ButtonStyled bgColor={buyBgColor} textColor={buyTextColor} onClick={() => handleBuyOrSell("buy")}>
@@ -119,7 +97,6 @@ export default function CoinForm() {
             <form onSubmit={handleSubmit}>
                 <select name="currency">
                     {selectedCurrenciesData.map((coin) => {
-                        // setCurrencyToBuyOrSellData(coin);
                         return <option key={coin.id}>{coin.name}</option>
                     })}
                 </select>

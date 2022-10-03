@@ -1,19 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
 import { AddToFavButton, SelectedCoinInfo } from '../styles/coinInfo.styles.jsx';
 
 export default function CoinInfo() {
     const {selectedCoinInfoData, favCoins, setFavCoins} = useContext(CurrencyDataContext);
+    const [alreadyInFavMessage, setAlReadyInFavMessage] = useState('');
   
     const handleSetFavoriteCoins = () => {
       const existingFavCoin = favCoins.find(({ name }) => name === selectedCoinInfoData.name);
       if (!existingFavCoin) {
         return setFavCoins([...favCoins, selectedCoinInfoData]);
       } else if (existingFavCoin) {
-        return console.log("Coin already added to favorite")
+        setAlReadyInFavMessage("Coin already added to favorite");
       }
     }
     
+useEffect(() => {
+  setAlReadyInFavMessage('');
+}, [selectedCoinInfoData]);
+
     return (
       <SelectedCoinInfo>
         <h3>
@@ -54,6 +59,7 @@ export default function CoinInfo() {
         {/* <span id="alreadyInFavMessage" className="isVisible">
           Currency already added to favorite
         </span> */}
+        {alreadyInFavMessage}
       </SelectedCoinInfo>
     )
 }
