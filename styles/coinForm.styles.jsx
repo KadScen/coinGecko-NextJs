@@ -5,21 +5,6 @@ export const SelectedCoinFormContainerStyled = styled.div`
     width: 50%;
     border: 1px solid #e2e2e2;
 
-    button {
-        background-color: white;
-        color: #ff962e;
-        border: 2px solid #ff962e; /* Green */
-        // padding: 20px 60px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        width: 200px;
-        height: 50px;
-    }
-
     select {
         border: none;
         border-bottom: 1px solid #e2e2e2;
@@ -50,6 +35,21 @@ export const SelectedCoinFormContainerStyled = styled.div`
         cursor: pointer;
         width: 100%;
       }
+`
+
+export const ButtonStyled = styled.button`
+  background-color: ${props => props.bgColor || 'white'};
+  color: ${props => props.textColor || '#ff962e'};
+  border: 2px solid #ff962e; /* Green */
+  // padding: 20px 60px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
 `
 
 export const SelectedCoinFormButtonsStyled = styled.div`
