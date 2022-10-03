@@ -36,10 +36,6 @@ export const FavoriteCoinButton = styled.p`
     }
 `
 
-export const RemoveButtonStyled = styled.span`
-    display: none;
-`
-
 export const FavoriteCoinButtonContent = styled.span`
     display: flex;
     justify-content: center;
@@ -48,12 +44,15 @@ export const FavoriteCoinButtonContent = styled.span`
     ${FavoriteCoinButton}:hover & {
         display: none;
     }
+`
 
-    ${RemoveButtonStyled}:hover & {
+export const RemoveButtonStyled = styled.span`
+    display: none;
+
+    ${FavoriteCoinButton}:hover & {
         display: block;
     }
 `
-
 // .favorite-coins-buttons-container {
  
 //     .favorite-coin-button {
