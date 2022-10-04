@@ -6,6 +6,11 @@ export default function CoinInfo() {
     const {selectedCoinInfoData, favCoins, setFavCoins} = useContext(CurrencyDataContext);
     const [alreadyInFavMessage, setAlReadyInFavMessage] = useState('');
   
+    useEffect(() => {
+      const win = window.sessionStorage;
+      win.setItem("favCoins", JSON.stringify(favCoins));
+    }, [favCoins]);
+
     const handleSetFavoriteCoins = () => {
       const existingFavCoin = favCoins.find(({ name }) => name === selectedCoinInfoData.name);
       if (!existingFavCoin) {

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { CurrencyDataContext } from "../contexts/currency-data.context.jsx";
 
@@ -6,6 +6,12 @@ import { FavoriteCoinsStyled, FavoriteCoinsButtonsContainerStyled, FavoriteCoinB
 
 function FavoriteCoins() {
     const {favCoins, setFavCoins} = useContext(CurrencyDataContext);
+
+    useEffect(() => {
+        const win = window.sessionStorage;
+        if (win.getItem("favCoins"))
+            setFavCoins(JSON.parse(win.getItem("favCoins")));
+        }, []);
 
     const handleRemoveFavoriteCoin = (currencyToDelete) => {
         const newCoins = favCoins.filter(
