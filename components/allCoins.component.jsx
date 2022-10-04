@@ -1,25 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AllCoinsStyled, TableStyled, TrStyled, TdNameStyled, TdRegStyled, TdRegStyledBigScreen, ThNameStyled, ThRegStyled, ThRegStyledBigScreen } from '../styles/allCoins.styles';
+import axios from 'axios';
+
 import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
+
+import { AllCoinsStyled, TableStyled, TrStyled, TdNameStyled, TdRegStyled, TdRegStyledBigScreen, ThNameStyled, ThRegStyled, ThRegStyledBigScreen } from '../styles/allCoins.styles';
 
 export const AllCoins = () => {
     const [listCoinsData, setListCoinsData] = useState([]);
     const {selectedCurrenciesData, setSelectedCurrenciesData, selectedCoinInfoData, setSelectedCoinInfoData, coinsToUse} = useContext(CurrencyDataContext);
 
     useEffect(() => {
-        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(
-                    `This is an HTTP error: The status is ${response.status}`
-                );
-            }
-            return response.json();
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad`).then(response => {
+            setListCoinsData(response.data)
         })
-        .then((actualData) => setListCoinsData(actualData))
-        .catch((err) => {
-            console.log(err.message);
-        });
     }, []);
 
     useEffect(() => {
