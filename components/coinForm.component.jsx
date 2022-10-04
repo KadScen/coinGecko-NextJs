@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { CurrencyDataContext } from '../contexts/currency-data.context.jsx';
 
@@ -46,18 +47,9 @@ export default function CoinForm() {
 
     useEffect(() => {
         const currenciesDiffPrice = async () => {
-          await fetch(
-            `https://api.coingecko.com/api/v3/simple/price?ids=${selectedCoinInfoData.id}&vs_currencies=${currencyToBuyOrSellData.symbol}`
-          )
-            .then((response) => response.json())
-            .then((data) =>
-              setCurrenciesValueComparaison(
-                data[selectedCoinInfoData.id][currencyToBuyOrSellData.symbol]
-              )
-            )
-            .catch((err) => {
-              console.log(err.message);
-            });
+          axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${selectedCoinInfoData.id}&vs_currencies=${currencyToBuyOrSellData.symbol}`).then(response => {
+            setCurrenciesValueComparaison(response.data[selectedCoinInfoData.id][currencyToBuyOrSellData.symbol])
+          })
         };
         currenciesDiffPrice();
       }, [selectedCoinInfoData, currencyToBuyOrSellData]);
